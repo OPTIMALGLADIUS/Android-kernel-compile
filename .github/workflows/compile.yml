@@ -1,4 +1,4 @@
-name: build
+name: compile
 on:
  workflow_dispatch:
    
