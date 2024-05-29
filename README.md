@@ -12,7 +12,7 @@ This is still an early project and I'm still working on it, So feel free to give
 ## Introduction
 
 This uses the same idea as how an Android kernel is compiled.
-This project just uses GitHub actions for kernel compiling making the kernel compiling completely online and also allowing users, who don't have a good for compiling, to compile their Android devices' kernel according to their wish.
+This project just uses GitHub actions for kernel compiling making the kernel compiling completely online and also allowing users, who don't have a good PC for compiling kernels, to compile their Android devices' kernel according to their wish.
 >It also works for the Android kernels which can't be compiled on your Android device because of some issues.
 
 ## Important
