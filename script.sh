@@ -16,4 +16,4 @@ cd kernel/
 rm -rf out
 
 #Making config file
-make ARCH=arm64 CC=$PWD/../prebuilts/clang/host/linux-x86/clang-r383902b/bin/clang O=out tb8768tp1_64_bsp_defconfig
+sudo make ARCH=arm64 CC=$PWD/../prebuilts/clang/host/linux-x86/clang-r383902b/bin/clang O=out tb8768tp1_64_bsp_defconfig
