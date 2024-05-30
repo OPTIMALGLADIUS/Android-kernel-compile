@@ -11,3 +11,9 @@ sudo apt install git ccache automake flex lzop bison gperf build-essential zip c
 
 #Going to kernel directory
 cd kernel/
+
+#Removing out directory
+rm -rf out
+
+#Making config file
+make ARCH=arm64 CC=$PWD/../prebuilts/clang/host/linux-x86/clang-r383902b/bin/clang O=out tb8768tp1_64_bsp_defconfig
