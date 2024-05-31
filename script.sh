@@ -10,10 +10,16 @@ sudo apt update && sudo apt upgrade -y
 sudo apt install git ccache automake flex lzop bison gperf build-essential zip curl zlib1g-dev zlib1g-dev:i386 g++-multilib python-networkx-doc libxml2-utils bzip2 libbz2-dev libbz2-1.0 libghc-bzlib-dev squashfs-tools pngcrush schedtool dpkg-dev liblz4-tool make optipng maven libssl-dev pwgen libswitch-perl policycoreutils minicom libxml-sax-base-perl libxml-simple-perl bc libc6-dev-i386 lib32ncurses5-dev x11proto-core-dev libx11-dev lib32z-dev libgl1-mesa-dev xsltproc unzip -y
 
 #Going to kernel directory
-cd kernel/
+cd
 
-#Removing out directory
-rm -rf out
+#Downloading necessary package for Google Drive
+pip3 install gdown
 
-#Making config file
-sudo make ARCH=arm64 CC=$PWD/../prebuilts/clang/host/linux-x86/clang-r383902b/bin/clang O=out tb8768tp1_64_bsp_defconfig
+#Downloading kernel
+gdown https://drive.google.com/uc?id=1NmtDxeqYg5M-gsybfdsD5COJA97kTUiT
+
+#Extracting kernel
+tar -xf kernel-4.19.127.tar.gz
+
+#Going to kernel directory
+cd kernel-4.19
