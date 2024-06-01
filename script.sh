@@ -34,4 +34,4 @@ make ARCH=arm64 CC=$PWD/../prebuilts/host/linux-x86/clang-r383902b/bin/clang CLA
 cp ../config out/.config
 
 #Making kernel
-make ARCH=arm64 CC=$PWD/../prebuilts/host/linux-x86/clang-r383903b/bin/clang CLANG_TRIPLE=aarch64-linux-gnu- CROSS_COMPILE=$PWD/../prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9.1/bin/aarch64-linux-androidkernel- O=out -j$(nproc --all)
+make ARCH=arm64 CC=$PWD/../prebuilts/host/linux-x86/clang-r383902b/bin/clang CLANG_TRIPLE=aarch64-linux-gnu- CROSS_COMPILE=$PWD/../prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9.1/bin/aarch64-linux-androidkernel- O=out -j$(nproc --all)
