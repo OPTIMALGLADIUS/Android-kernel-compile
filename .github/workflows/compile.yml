@@ -10,5 +10,17 @@ jobs:
    - name: Checkout
      uses: actions/checkout@v2
 
-   - name: Run
+   - name: Run Script
      run: bash script.sh
+
+   - name: Upload Kernel
+     uses: actions/upload-artifact@v4
+     with:
+       name: Image.gz
+       path: ~/kernel-4.19/out/arch/arm64/boot/Image.gz
+
+   - name: Upload kernel 2
+     uses: actions/upload-artifact@v4
+     with:
+       name: Image
+       path: ~/kernel-4.19/out/arch/arm64/boot/Image
