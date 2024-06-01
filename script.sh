@@ -28,4 +28,10 @@ wget https://download1649.mediafire.com/xqui0k2dykmgu7f-VRWnw-1tT70KFfoQ1TVo4rQy
 cd kernel-4.19
 
 #Making the defconfig
-make ARCH=arm64 CC=$PWD/../prebuilts/host/linux-x86/clang-r383902b/bin/clang CLANG_TRIPLE=aarch64-linux-gnu- CROSS_COMPILE=$PWD/../prebuilts/gcc/aarch64
+make ARCH=arm64 CC=$PWD/../prebuilts/host/linux-x86/clang-r383902b/bin/clang CLANG_TRIPLE=aarch64-linux-gnu- CROSS_COMPILE=$PWD/../prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9.1/bin/aarch64-linux-androidkernel- O=out tb8768tp1_64_bsp_defconfig
+
+#Editing config file
+cp ../config out/.config
+
+#Making kernel
+make ARCH=arm64 CC=$PWD/../prebuilts/host/linux-x86/clang-r383903b/bin/clang CLANG_TRIPLE=aarch64-linux-gnu- CROSS_COMPILE=$PWD/../prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9.1/bin/aarch64-linux-androidkernel- O=out -j$(nproc --all)
