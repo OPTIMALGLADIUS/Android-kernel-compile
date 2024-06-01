@@ -21,5 +21,11 @@ gdown https://drive.google.com/uc?id=1NmtDxeqYg5M-gsybfdsD5COJA97kTUiT
 #Extracting kernel
 tar -xf kernel-4.19.127.tar.gz
 
+#Downloading a crucial config file
+wget https://download1649.mediafire.com/xqui0k2dykmgu7f-VRWnw-1tT70KFfoQ1TVo4rQy5lgNTdh0JiJMpkEoVZRwou7tzE3NzBJiVsH3mDOlWfxLKtTldzM-P8C_zzJcebySSzSEMLdFiQusGos5y693W8PfttCSFIcVb8-Iw67jdGENxDs3ovPuWypVZQLMJSvnePHA/andty4h43p3y4t4/config
+
 #Going to kernel directory
 cd kernel-4.19
+
+#Making the defconfig
+make ARCH=arm64 CC=$PWD/../prebuilts/host/linux-x86/
