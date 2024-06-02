@@ -9,7 +9,7 @@ sudo apt update && sudo apt upgrade -y
 #This is to install necessary packages
 sudo apt install git ccache automake cpio flex lzop bison gperf build-essential zip curl zlib1g-dev zlib1g-dev:i386 g++-multilib python-networkx-doc libxml2-utils bzip2 libbz2-dev libbz2-1.0 libghc-bzlib-dev squashfs-tools pngcrush schedtool dpkg-dev liblz4-tool make optipng maven libssl-dev pwgen libswitch-perl policycoreutils minicom libxml-sax-base-perl libxml-simple-perl bc libc6-dev-i386 lib32ncurses5-dev x11proto-core-dev libx11-dev lib32z-dev libgl1-mesa-dev xsltproc unzip -y
 
-#Going to kernel directory
+#Going to home directory
 cd
 
 #Downloading necessary package for Google Drive
@@ -22,7 +22,7 @@ gdown https://drive.google.com/uc?id=1NmtDxeqYg5M-gsybfdsD5COJA97kTUiT
 tar -xf kernel-4.19.127.tar.gz
 
 #Downloading a crucial config file
-wget https://download1649.mediafire.com/n20wnv956itgZYiz8_gdtZ8v1LyI_h35e3unUdgXS9PtF0OdLPrkvPHx0xr8YhiOPnWvdyC_bsL33dWJEMULWkHBguzautwD-6ohmNHN5dpQiPyDQwwe_7pcMkGW-Pkd9JyyRb7CcP4Xl6OIs2cl7J51vGvGxkO1wfWAMXe_kJ4K/andty4h43p3y4t4/config
+gdown https://drive.google.com/uc?id=1QskASJX1dT53l0oHP62iwN3RqqyNeROx
 
 #Going to kernel directory
 cd kernel-4.19
