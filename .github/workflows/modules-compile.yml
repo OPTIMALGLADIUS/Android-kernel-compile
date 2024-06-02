@@ -1,4 +1,4 @@
-name: compile
+name: modules-compile
 on:
  workflow_dispatch:
    
