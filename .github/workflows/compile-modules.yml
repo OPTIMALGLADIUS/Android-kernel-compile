@@ -1,0 +1,80 @@
+name: compile
+on:
+ workflow_dispatch:
+   
+jobs:
+ bash-script:
+  runs-on: ubuntu-latest
+
+  steps:
+   - name: Checkout
+     uses: actions/checkout@v2
+
+   - name: Run Script
+     run: bash modules.sh
+
+   - name: Upload Module
+     uses: actions/upload-artifact@v4
+     with:
+       name: gspca_main.ko
+       path: ~/kernel-4.19/out/drivers/media/usb/gspca/gspca_main.ko
+
+   - name: Upload Module 2
+     uses: actions/upload-artifact@v4
+     with:
+       name: sdhci-pltfm.ko
+       path: ~/kernel-4.19/out/drivers/mmc/host/sdhci-pltfm.ko
+
+   - name: Upload Module 3
+     uses: actions/upload-artifact@v4
+     with:
+       name: sdhci.ko
+       path: ~/kernel-4.19/out/drivers/mmc/host/sdhci.ko
+
+   - name: Upload Module 4
+     uses: actions/upload-artifact@v4
+     with:
+       name: mt6359_battery.ko
+       path: ~/kernel-4.19/out/drivers/power/supply/mt6359_battery.ko
+
+   - name: Upload Module 5
+     uses: actions/upload-artifact@v4
+     with:
+       name: 8250_of.ko
+       path: ~/kernel-4.19/out/drivers/tty/serial/8250/8250_of.ko
+
+   - name: Upload Module 6
+     uses: actions/upload-artifact@v4
+     with:
+       name: dummy_hcd.ko
+       path: ~/kernel-4.19/out/drivers/usb/gadget/udc/dummy_hcd.ko
+
+   - name: Upload Module 7
+     uses: actions/upload-artifact@v4
+     with:
+       name: efivarfs.ko
+       path: ~/kernel-4.19/out/fs/efivarfs/efivarfs.ko
+
+   - name: Upload Module 8
+     uses: actions/upload-artifact@v4
+     with:
+       name: kheaders.ko
+       path: ~/kernel-4.19/out/kernel/kheaders.ko
+
+   - name: Upload Module 9
+     uses: actions/upload-artifact@v4
+     with:
+       name: tcp_htcp.ko
+       path: ~/kernel-4.19/out/net/ipv4/tcp_htcp.ko
+
+   - name: Upload Module 10
+     uses: actions/upload-artifact@v4
+     with:
+       name: tcp_westwood.ko
+       path: ~/kernel-4.19/out/net/ipv4/tcp_westwood.ko
+
+   - name: Upload Module 11
+     uses: actions/upload-artifact@v4
+     with:
+       name: mt6359-accdet.ko
+       path: ~/kernel-4.19/out/sound/soc/codecs/mt6359-accdet.ko
