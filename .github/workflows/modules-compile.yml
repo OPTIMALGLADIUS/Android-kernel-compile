@@ -11,7 +11,7 @@ jobs:
      uses: actions/checkout@v2
 
    - name: Run Script
-     run: bash modules.sh
+     run: bash module.sh
 
    - name: Upload Module
      uses: actions/upload-artifact@v4
