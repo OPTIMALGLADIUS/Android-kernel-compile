@@ -15,8 +15,8 @@ wget http://nz2.archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl-dev_1.1.1f-
 wget http://nz2.archive.ubuntu.com/ubuntu/pool/main/o/openssl/openssl_1.1.1f-1ubuntu2.22_amd64.deb
 
 #Installing
-sudo dpkg --install openssl_1.1.1f-ubuntu2.22_amd64.deb -y
-sudo dpkg --install libssl-dev_1.1.1f-ubuntu2.22_amd64.deb -y
+sudo dpkg --install ‘openssl_1.1.1f-1ubuntu2.22_amd64.deb’ -y
+sudo dpkg --install ‘libssl-dev_1.1.1f-1ubuntu2.22_amd64.deb’ -y
 
 #This is to install necessary packages
 sudo apt install git ccache automake cpio flex lzop bison gperf build-essential zip curl zlib1g-dev zlib1g-dev:i386 g++-multilib python-networkx-doc libxml2-utils bzip2 libbz2-dev libbz2-1.0 libghc-bzlib-dev squashfs-tools pngcrush schedtool dpkg-dev liblz4-tool make optipng maven pwgen libswitch-perl policycoreutils minicom libxml-sax-base-perl libxml-simple-perl bc libc6-dev-i386 lib32ncurses5-dev x11proto-core-dev libx11-dev lib32z-dev libgl1-mesa-dev xsltproc unzip -y
