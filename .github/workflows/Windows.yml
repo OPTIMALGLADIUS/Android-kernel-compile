@@ -23,6 +23,15 @@ jobs:
           Invoke-WebRequest "https://damassets.autodesk.net/content/dam/autodesk/www/adn/fbx/2020-2-1/fbx202021_fbxsdk_vs2019_pdbs.exe" -OutFile "fbxpdb.exe"
           Start-Process -FilePath "fbxpdb.exe" /S -Wait
           cd ..
+
+      - name: Clone
+        run: git clone https://github.com/aelurum/AssetStudio.git
+             cd AssetStudio/AssetStudioFBXNative
+             mkdir build
+
+      - name: Build .Net8
+        run: msbuild AssetStudioFBXNative.vcxproj /t:restore;rebuild;publish /p:Configuration=Release /p:TargetFramework=net8.0-windows /p:RuntimeIdentifier=linux-x64 
+        
       - uses: actions/checkout@v4
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
