@@ -31,7 +31,9 @@ jobs:
              md build
 
       - name: Build .Net8
-        run: msbuild AssetStudioFBXNative.vcxproj /p:Configuration=Release /p:TargetFramework=net8.0-windows /p:RuntimeIdentifier=linux-x64 
+        run: |
+            cd AssetStudio/AssetStudioFBXNative
+            msbuild AssetStudioFBXNative.vcxproj /p:Configuration=Release /p:TargetFramework=net8.0-windows /p:RuntimeIdentifier=linux-x64 
         
       - uses: actions/checkout@v4
       - name: Setup tmate session
