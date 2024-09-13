@@ -25,9 +25,10 @@ jobs:
           cd ..
 
       - name: Clone
-        run: git clone https://github.com/aelurum/AssetStudio.git
+        run: |
+             git clone https://github.com/aelurum/AssetStudio.git
              cd AssetStudio/AssetStudioFBXNative
-             mkdir build
+             md build
 
       - name: Build .Net8
         run: msbuild AssetStudioFBXNative.vcxproj /t:restore;rebuild;publish /p:Configuration=Release /p:TargetFramework=net8.0-windows /p:RuntimeIdentifier=linux-x64 
