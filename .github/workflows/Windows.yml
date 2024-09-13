@@ -11,6 +11,18 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v4
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
+      - uses: actions/checkout@v2
+      - uses: microsoft/setup-msbuild@v1.1
+      
+      - name: Download FBX SDK
+        run: |
+          md fbx
+          cd fbx
+          Invoke-WebRequest "https://damassets.autodesk.net/content/dam/autodesk/www/files/fbx202037_fbxsdk_vs2022_win.exe" -OutFile "fbxsdk.exe"
+          Start-Process -FilePath "fbxsdk.exe" /S -Wait
+          Invoke-WebRequest "https://damassets.autodesk.net/content/dam/autodesk/www/adn/fbx/2020-2-1/fbx202021_fbxsdk_vs2019_pdbs.exe" -OutFile "fbxpdb.exe"
+          Start-Process -FilePath "fbxpdb.exe" /S -Wait
+          cd ..
+      - uses: actions/checkout@v4
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
