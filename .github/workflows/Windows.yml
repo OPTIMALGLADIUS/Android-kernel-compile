@@ -17,7 +17,7 @@ jobs:
       - name: Download FBX SDK
         run: |
           pip install gdown
-          gdown https://drive.google.com/uc?id=1nflAivn0Us8cDmo4BFgiI_YI83i0SDDL
+          gdown https://drive.google.com/uc?id=1X1BFi9NoELYfuFyTR8bXXgUvauVszvGG
           md fbx
           cd fbx
           Invoke-WebRequest "https://damassets.autodesk.net/content/dam/autodesk/www/files/fbx202037_fbxsdk_vs2022_win.exe" -OutFile "fbxsdk.exe"
@@ -28,9 +28,7 @@ jobs:
 
       - name: Clone
         run: |
-             unzip 2020.3.7.zip
-             git clone https://github.com/aelurum/AssetStudio.git
-             xcopy D:\a\Android-kernel-compile\Android-kernel-compile\2020.3.7\include\*.* D:\a\Android-kernel-compile\Android-kernel-compile\AssetStudio\AssetStudioFBXNative /s /e
+             unzip AssetStudio
              cd AssetStudio/AssetStudioFBXNative
              md build
 
