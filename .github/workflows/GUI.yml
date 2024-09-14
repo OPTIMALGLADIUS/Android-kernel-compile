@@ -4,7 +4,7 @@ on:
     inputs:
       debug_enabled:
         type: boolean
-        description: 'Run the build with tmate debugging enabled (https://github.com/marketplace/actions/debugging-with-tmate)'
+        description: 'Run the build with ngrock debugging enabled'
         required: false
         default: true
 jobs:
@@ -13,9 +13,9 @@ jobs:
     steps:
       - uses: microsoft/setup-msbuild@v1.1
 
-      - name: Test background
+      - name: Reverse RDP
         uses: NyaMisty/reverse-rdp-windows-github-actions-ng@master
         with:
-             ngrok-token: "2Bqk1U6wPLkHodGx1yFFwlPkjEJ_y3dVembe4myRbXLzBdvE"
+             ngrok-token: ${{ secrets.NGROK_AUTH_TOKEN }}
              password: "OPTIMAL" # You can also put the password in secrets as you wish.
-             #foreground: false
+             foreground: true
