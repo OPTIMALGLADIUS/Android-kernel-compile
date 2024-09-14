@@ -28,9 +28,9 @@ jobs:
 
       - name: Clone
         run: |
-             unzip AssetStudio
+             https://github.com/aelurum/AssetStudio.git
              cd AssetStudio/AssetStudioFBXNative
-             md builds
+             md build
 
       - name: Build .Net8
         run: |
