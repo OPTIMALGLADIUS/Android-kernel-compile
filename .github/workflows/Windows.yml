@@ -13,6 +13,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: microsoft/setup-msbuild@v1.1
+
+      - name: Set up MinGW
+        uses: egor-tensin/setup-mingw@v2
+        with:
+             platform: arm64
       
       - name: Download FBX SDK
         run: |
