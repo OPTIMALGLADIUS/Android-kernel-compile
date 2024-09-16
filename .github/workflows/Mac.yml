@@ -19,7 +19,6 @@ jobs:
             bash
             brew install binutils
             brew install texinfo
-            brew install isl
             xcode-select --install
             sudo cp -rf /opt/homebrew/include /usr/local/include
             sudo cp -rf /opt/homebrew/lib /usr/local/lib
