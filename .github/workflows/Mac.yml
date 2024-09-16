@@ -17,6 +17,9 @@ jobs:
       - name: Build GCC
         run: |
             bash
+            brew install binutils
+            brew install texinfo
+            brew install isl
             sudo cp -rf /opt/homebrew/include /usr/local/include
             sudo cp -rf /opt/homebrew/lib /usr/local/lib
             sudo cp -rf /opt/homebrew/bin /usr/local/bin
