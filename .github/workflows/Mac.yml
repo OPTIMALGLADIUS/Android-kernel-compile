@@ -26,8 +26,6 @@ jobs:
             mkdir output
             cd build
             ../configure --target=aarch64-linux-gnu --prefix=$PWD/../output
-            make
-            make install
       
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
