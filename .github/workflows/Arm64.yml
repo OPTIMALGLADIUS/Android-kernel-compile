@@ -1,0 +1,61 @@
+name: CI
+on:
+  workflow_dispatch:
+    inputs:
+      debug_enabled:
+        type: boolean
+        description: 'Run the build with tmate debugging enabled (https://github.com/marketplace/actions/debugging-with-tmate)'
+        required: false
+        default: false
+        
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Maximize build space
+      uses: easimon/maximize-build-space@master
+      with:
+        root-reserve-mb: 512
+        swap-size-mb: 1024
+        remove-dotnet: 'true'
+        remove-android: 'true'
+        remove-haskell: 'true'
+        remove-codeql: 'true'
+        remove-docker-images: 'true'
+    - name: Setup repository
+      uses: actions/checkout@v3
+    - name: Build
+      run: |
+          echo "Free space:"
+          df -h
+
+    - uses: uraimo/run-on-arch-action@v2
+      name: Architecture
+      id: runcmd
+      with:
+         arch: aarch64
+         distro: ubuntu22.04
+         
+         run: |
+            pip install gdown
+            git clone --depth 1 https://github.com/tpoechtrager/osxcross.git
+            cd osxcross
+            sudo apt install lzma-dev libxml2-dev -y
+            gdown https://drive.google.com/uc?id=1Xf1_oZ42ndV3r5YQhbL97MHuD1TOAwtw
+            gdown https://drive.google.com/uc?id=1XfzEnjJVCnDjSGt4XKUS4pV_DsOYMGK6
+            cp MacOSX15.sdk.tar.xz tarballs
+            cp MacOSX15.0.sdk.tar.xz tarballs
+            UNATTENDED=1 ./build.sh
+      
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v3
+
+    - uses: actions/upload-artifact@v4 
+      with:
+        name: MacOSX15.sdk.tar.xz
+        path: /home/runner/work/Android-kernel-compile/Android-kernel-compile/osxcross/MacOSX15.sdk.tar.xz
+
+    - uses: actions/upload-artifact@v4
+      with:
+        name: MacOSX15.0.sdk.tar.xz
+        path: /home/runner/work/Android-kernel-compile/Android-kernel-compile/osxcross/MacOSX15.0.sdk.tar.xz
