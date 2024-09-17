@@ -40,7 +40,6 @@ jobs:
          gdown https://drive.google.com/uc?id=1XfzEnjJVCnDjSGt4XKUS4pV_DsOYMGK6
          cp MacOSX15.sdk.tar.xz tarballs
          cp MacOSX15.0.sdk.tar.xz tarballs
-         SDK_VERSION=15.0 ./build.sh
       
     - name: Setup tmate session
       uses: mxschmitt/action-tmate@v3
