@@ -36,8 +36,8 @@ jobs:
          git clone --depth 1 https://github.com/tpoechtrager/osxcross.git
          cd osxcross
          sudo apt install lzma-dev libxml2-dev -y
-         wget https://github.com/OPTIMALGLADIUS/Android-kernel-compile/actions/runs/10904332984/artifacts/1942921587
-         https://github.com/OPTIMALGLADIUS/Android-kernel-compile/actions/runs/10904332984/artifacts/1942921334
+         gdown https://drive.google.com/uc?id=1Xf1_oZ42ndV3r5YQhbL97MHuD1TOAwtw
+         gdown https://drive.google.com/uc?id=1XfzEnjJVCnDjSGt4XKUS4pV_DsOYMGK6
          cp MacOSX15.sdk.tar.xz tarballs
          cp MacOSX15.0.sdk.tar.xz tarballs
          SDK_VERSION=15.0 ./build.sh
