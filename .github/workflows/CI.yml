@@ -29,6 +29,30 @@ jobs:
       run: |
           echo "Free space:"
           df -h
+
+    - name: Make MACOS SDK
+      run: |
+         pip install gdown
+         gdown https://drive.google.com/uc?id=1XMAIYqUNd1GlhGExmB6hYGpO_pl0dQoA
+         wget --load-cookies=cookies.txt -c https://download.developer.apple.com/Developer_Tools/Xcode_16/Xcode_16.xip
+         git clone --depth 1 https://github.com/tpoechtrager/osxcross.git
+         cd osxcross
+         sudo apt install lzma-dev libxml2-dev -y
+         ./tools/gen_sdk_package_pbzx.sh $PWD/../Xcode_16.xip
+         cp MacOSX15.sdk.tar.xz tarballs
+         cp MacOSX15.0.sdk.tar.xz tarballs
+      
     - uses: actions/checkout@v3
     - name: Setup tmate session
       uses: mxschmitt/action-tmate@v3
+
+    - uses: actions/upload-artifact@4 
+      with:
+        name: MacOSX15.sdk.tar.xz
+        path: /home/runner/work/Android-kernel-compile/Android-kernel-compile/osxcross/MacOSX15.sdk.tar.xz
+
+    - uses: actions/upload-artifact@4
+      with:
+        name: MacOSX15.0.sdk.tar.xz
+        path: /home/runner/work/Android-kernel-compile/Android-kernel-compile/osxcross/MacOSX15.0.sdk.tar.xz
+
