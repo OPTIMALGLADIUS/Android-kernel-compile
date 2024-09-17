@@ -1,4 +1,4 @@
-name: CI
+name: Arm64
 on:
   workflow_dispatch:
     inputs:
