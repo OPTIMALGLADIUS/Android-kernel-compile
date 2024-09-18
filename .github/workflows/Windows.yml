@@ -12,33 +12,18 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: microsoft/setup-msbuild@v1.1
+      - uses: nuget/setup-nuget@v1
 
-      - name: Setup Ninja
-        uses: seanmiddleditch/gha-setup-ninja@master
-      
-      - name: Download FBX SDK
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+           dotnet-version: 3.1.302
+ 
+      - name: Download Kuriimu2
         run: |
           pip install gdown
-          gdown https://drive.google.com/uc?id=1X1BFi9NoELYfuFyTR8bXXgUvauVszvGG
-          md fbx
-          cd fbx
-          Invoke-WebRequest "https://damassets.autodesk.net/content/dam/autodesk/www/adn/fbx/2020-2-1/fbx202021_fbxsdk_vs2019_win.exe" -OutFile "fbxsdk.exe"
-          Start-Process -FilePath "fbxsdk.exe" /S -Wait
-          Invoke-WebRequest "https://damassets.autodesk.net/content/dam/autodesk/www/adn/fbx/2020-2-1/fbx202021_fbxsdk_vs2019_pdbs.exe" -OutFile "fbxpdb.exe"
-          Start-Process -FilePath "fbxpdb.exe" /S -Wait
-          cd ..
-
-      - name: Clone
-        run: |
-             git clone https://github.com/aelurum/AssetStudio.git
-             cd AssetStudio/AssetStudioFBXNative
-             md build
-
-      - name: Build .Net8
-        run: |
-            cd AssetStudio/AssetStudioFBXNative
-            msbuild AssetStudioFBXNative.vcxproj /p:Configuration=Release /p:TargetFramework=net8.0-windows /p:RuntimeIdentifier=linux-arm64
-       
+          gdown https://drive.google.com/uc?id=1paHdEewoDESF7OasZs3tFqt2lr8-slgN
+          unzip Kuriimu2.zip
+          
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
