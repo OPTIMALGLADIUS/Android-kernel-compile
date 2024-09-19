@@ -101,14 +101,6 @@ jobs:
         with:
           args: install openssl.light
 
-      - name: Sign releases
-        run: |
-           echo "$PRIVATE_KEY_CMD" > cmd.pem
-           openssl dgst -sha512 -sign cmd.pem -out ./Kuriimu2-1.2.1/update/Cmd/Linux/latest.sig ./Kuriimu2-1.2.1/update/Cmd/Linux/latest.zip
-        shell: bash
-        env:
-           PRIVATE_KEY_CMD: ${{secrets.PRIVATE_KEY_CMD}}
-
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
