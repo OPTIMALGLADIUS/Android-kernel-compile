@@ -1,0 +1,35 @@
+name: Linux2
+on:
+  workflow_dispatch:
+    inputs:
+      debug_enabled:
+        type: boolean
+        description: 'Run the build with tmate debugging enabled (https://github.com/marketplace/actions/debugging-with-tmate)'
+        required: false
+        default: false
+        
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Setup repository
+      uses: actions/checkout@v3
+    
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+          dotnet-version: 8.0.401
+
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v3
+
+    - uses: actions/upload-artifact@v4 
+      with:
+        name: MacOSX15.sdk.tar.xz
+        path: /home/runner/work/Android-kernel-compile/Android-kernel-compile/osxcross/MacOSX15.sdk.tar.xz
+
+    - uses: actions/upload-artifact@v4
+      with:
+        name: MacOSX15.0.sdk.tar.xz
+        path: /home/runner/work/Android-kernel-compile/Android-kernel-compile/osxcross/MacOSX15.0.sdk.tar.xz
+ 
