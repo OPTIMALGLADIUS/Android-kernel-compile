@@ -24,6 +24,91 @@ jobs:
           pip install gdown
           gdown https://drive.google.com/uc?id=1Y3gMs3uKsE2fwwIk7FRttKNgX5DeYVim
           unzip Kuriimu2-1.2.1.zip
+
+      - name: Build Kuriimu2.Cmd
+        run: |
+           cd Kuriimu2-1.2.1
+           mkdir update
+           mkdir update/Cmd
+           mkdir update/Cmd/Linux
+           cp src/Kuriimu2.Cmd/Resources/version.json update/Cmd/Linux/manifest.json
+           dotnet publish ./src/Kuriimu2.Cmd/Kuriimu2.Cmd.csproj --output ./dist/final/Cmd/Linux --configuration Release --framework netcoreapp31 --runtime linux-arm64 /p:PublishSingleFile=true
+           mv ./dist/final/Cmd/Linux/Kuriimu2.Cmd ./dist/final/Cmd/Linux/Kuriimu2
+           rm ./dist/final/Cmd/Linux/*.pdb
+           dotnet build ./src/Kontract/Kontract.csproj --configuration Release
+           dotnet build ./src/Komponent/Komponent.csproj --configuration Release
+           dotnet build ./src/Kanvas/Kanvas.csproj --configuration Release
+           dotnet build ./src/Kompression/Kompression.csproj --configuration Release
+           dotnet build ./src/Kryptography/Kryptography.csproj --configuration Release
+           dotnet pack ./src/Kontract/Kontract.csproj --configuration Release --verbosity normal
+           dotnet pack ./src/Komponent/Komponent.csproj --configuration Release --verbosity normal
+           dotnet pack ./src/Kanvas/Kanvas.csproj --configuration Release --verbosity normal
+           dotnet pack ./src/Kompression/Kompression.csproj --configuration Release --verbosity normal
+           dotnet pack ./src/Kryptography/Kryptography.csproj --configuration Release --verbosity normal
+           dotnet build ./plugins/FurYu/FurYu.sln --output ./dist/final/plugins --configuration Release
+           dotnet build ./plugins/ArcSystemWorks/ArcSystemWorks.sln --output ./dist/final/plugins --configuration Release
+           dotnet build ./plugins/Atlus/Atlus.sln --output ./dist/final/plugins --configuration Release
+           dotnet build ./plugins/BandaiNamco/BandaiNamco.sln --output ./dist/final/plugins --configuration Release
+           dotnet build ./plugins/Capcom/plugin_capcom/plugin_capcom.csproj --output ./dist/final/plugins --configuration Release
+           dotnet build ./plugins/Capcom/plugin_mt_framework/plugin_mt_framework.csproj --output ./dist/final/plugins --configuration Release
+           dotnet build ./plugins/Criware/Criware.sln --output ./dist/final/plugins --configuration Release
+           dotnet build ./plugins/DotEmu/DotEmu.sln --output ./dist/final/plugins --configuration Release
+           dotnet build ./plugins/Felistella/Felistella.sln --output ./dist/final/plugins --configuration Release
+           dotnet build ./plugins/HeadstrongGames/HeadstrongGames.sln --output ./dist/final/plugins --configuration Release
+           dotnet build ./plugins/IntiCreates/IntiCreates.sln --output ./dist/final/plugins --configuration Release
+           dotnet build ./plugins/Kadokawa/plugin_kadokawa/plugin_kadokawa.csproj --output ./dist/final/plugins --configuration Release
+           dotnet build ./plugins/KhronosGroup/KhronosGroup.sln --output ./dist/final/plugins --configuration Release
+           dotnet build ./plugins/KoeiTecmo/KoeiTecmo.sln --output ./dist/final/plugins --configuration Release
+           dotnet build ./plugins/Konami/Konami.sln --output ./dist/final/plugins --configuration Release
+           dotnet build ./plugins/Level5/Level5.sln --output ./dist/final/plugins --configuration Release
+           dotnet build ./plugins/MercurySteam/MercurySteam.sln --output ./dist/final/plugins --configuration Release
+           dotnet build ./plugins/Nintendo/Nintendo.sln --output ./dist/final/plugins --configuration Release
+           dotnet build ./plugins/NipponIchiSoftware/NipponIchiSoftware.sln --output ./dist/final/plugins --configuration Release
+           dotnet build ./plugins/Shade/Shade.sln --output ./dist/final/plugins --configuration Release
+           dotnet build ./plugins/Sony/plugin_sony/plugin_sony.csproj --output ./dist/final/plugins --configuration Release
+           dotnet build ./plugins/Sega/plugin_sega/plugin_sega.csproj --output ./dist/final/plugins --configuration Release
+           dotnet build ./plugins/SquareEnix/SquareEnix.sln --output ./dist/final/plugins --configuration Release
+           dotnet build ./plugins/StingEntertainment/StingEntertainment.sln --output ./dist/final/plugins --configuration Release
+           dotnet build ./plugins/TamSoft/TamSoft.sln --output ./dist/final/plugins --configuration Release
+           dotnet build ./plugins/VBlankEntertainment/VBlankEntertainment.sln --output ./dist/final/plugins --configuration Release
+           rm ./dist/final/plugins/*.pdb
+           rm ./dist/final/plugins/*.deps.json
+
+      - name: Copy Plugins
+        run: |
+           cd Kuriimu2-1.2.1
+           xcopy /I .\dist\final\plugins .\dist\final\Eto\Wpf\plugins
+           xcopy /I .\dist\final\plugins .\dist\final\Eto\Gtk\plugins
+           xcopy /I .\dist\final\plugins .\dist\final\Eto\Mac\plugins
+           xcopy /I .\dist\final\plugins .\dist\final\Cmd\Windows\plugins
+           xcopy /I .\dist\final\plugins .\dist\final\Cmd\Linux\plugins
+           xcopy /I .\dist\final\plugins .\dist\final\Cmd\Mac\plugins
+        shell: cmd
+
+      - name: Zip Cmd Linux release
+        uses: papeloto/action-zip@v1
+        with:
+          files: ./Kuriimu2-1.2.1/dist/final/Cmd/Linux
+          dest: ./Kuriimu2-1.2.1/update/Cmd/Linux/latest.zip
           
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
+
+      - name: Install openSSL
+        uses: crazy-max/ghaction-chocolatey@v1
+        with:
+          args: install openssl.light
+
+      - name: Sign releases
+        run: |
+           echo "$PRIVATE_KEY_CMD" > cmd.pem
+           openssl dgst -sha512 -sign cmd.pem -out ./Kuriimu2-1.2.1/update/Cmd/Linux/latest.sig ./Kuriimu2-1.2.1/update/Cmd/Linux/latest.zip
+        shell: bash
+        env:
+           PRIVATE_KEY_CMD: 2qazmlpoiu
+
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+           name: Kuriimu2
+           path: Kuriimu2-1.2.1/update/Cmd/Linux/latest.zip
