@@ -19,21 +19,11 @@ jobs:
         with:
            dotnet-version: 3.1.302
 
-      - name: Setup .NET Core
-        uses: actions/setup-dotnet@v1
-        with:
-           dotnet-version: 8.0.401
-
-      - name: Setup .NET Core
-        uses: actions/setup-dotnet@v1
-        with:
-           dotnet-version: 7.0.410
- 
       - name: Download Kuriimu2
         run: |
           pip install gdown
-          gdown https://drive.google.com/uc?id=1paHdEewoDESF7OasZs3tFqt2lr8-slgN
-          unzip Kuriimu2.zip
+          gdown https://drive.google.com/uc?id=1Y1QxhsWBZunJpX-E94kJfM9p_eciFVz_
+          unzip Kuriimu2.Net31.zip
           
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
