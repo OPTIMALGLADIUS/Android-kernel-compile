@@ -22,8 +22,8 @@ jobs:
       - name: Download Kuriimu2
         run: |
           pip install gdown
-          gdown https://drive.google.com/uc?id=1Y1QxhsWBZunJpX-E94kJfM9p_eciFVz_
-          unzip Kuriimu2.Net31.zip
+          gdown https://drive.google.com/uc?d=1Y3gMs3uKsE2fwwIk7FRttKNgX5DeYVim
+          unzip Kuriimu2-1.2.1.zip
           
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
