@@ -71,8 +71,8 @@ jobs:
            dotnet build ./plugins/StingEntertainment/StingEntertainment.sln --output ./dist/final/plugins --configuration Release
            dotnet build ./plugins/TamSoft/TamSoft.sln --output ./dist/final/plugins --configuration Release
            dotnet build ./plugins/VBlankEntertainment/VBlankEntertainment.sln --output ./dist/final/plugins --configuration Release
-           rm ./dist/final/plugins/*.pdb
-           rm ./dist/final/plugins/*.deps.json
+           rm dist/final/plugins/*.pdb
+           rm dist/final/plugins/*.deps.json
 
       - name: Copy Plugins
         run: |
