@@ -28,6 +28,8 @@ jobs:
       - name: Build Kuriimu2.Cmd
         run: |
            cd Kuriimu2-1.2.1
+           nuget sources add -name LocalFeed -source D:\a\Android-kernel-compile\Android-kernel-compile\Kuriimu2-1.2.1\nuget -verbosity detailed
+           nuget sources add -name EtoFeed -source https://www.myget.org/F/eto/api/v3/index.json -verbosity detailed 
            mkdir update
            mkdir update/Cmd
            mkdir update/Cmd/Linux
@@ -71,8 +73,8 @@ jobs:
            dotnet build ./plugins/StingEntertainment/StingEntertainment.sln --output ./dist/final/plugins --configuration Release
            dotnet build ./plugins/TamSoft/TamSoft.sln --output ./dist/final/plugins --configuration Release
            dotnet build ./plugins/VBlankEntertainment/VBlankEntertainment.sln --output ./dist/final/plugins --configuration Release
-           rm dist/final/plugins/*.pdb
-           rm dist/final/plugins/*.deps.json
+           rm ./dist/final/plugins/*.pdb
+           rm ./dist/final/plugins/*.deps.json
 
       - name: Copy Plugins
         run: |
