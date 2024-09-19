@@ -35,7 +35,7 @@ jobs:
            mkdir update/Cmd
            mkdir update/Cmd/Linux
            cp src/Kuriimu2.Cmd/Resources/version.json update/Cmd/Linux/manifest.json
-           CLR_OPENSSL_VERSION_OVERRIDE=3 dotnet publish ./src/Kuriimu2.Cmd/Kuriimu2.Cmd.csproj --output ./dist/final/Cmd/Linux --configuration Release --framework netcoreapp31 --runtime linux-arm64 /p:PublishSingleFile=true
+           dotnet publish ./src/Kuriimu2.Cmd/Kuriimu2.Cmd.csproj --output ./dist/final/Cmd/Linux --configuration Release --framework netcoreapp31 --runtime linux-arm64 /p:PublishSingleFile=true
            mv ./dist/final/Cmd/Linux/Kuriimu2.Cmd ./dist/final/Cmd/Linux/Kuriimu2
            rm ./dist/final/Cmd/Linux/*.pdb
            dotnet build ./src/Kontract/Kontract.csproj --configuration Release
