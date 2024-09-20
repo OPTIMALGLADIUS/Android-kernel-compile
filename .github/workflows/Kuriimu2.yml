@@ -22,7 +22,7 @@ jobs:
       - name: Download Kuriimu2
         run: |
           pip install gdown
-          gdown https://drive.google.com/uc?id=1YJHtdE9NacoaRaBEPSQppy2Hyg6bRiKD
+          gdown https://drive.google.com/uc?id=1Yd12h4KdSHRHM5kq3-sg-dqmD8mfG3L6
           unzip Kuriimu2-Gui.zip
 
       - name: Build Kuriimu2.Gui
@@ -79,7 +79,7 @@ jobs:
 
       - name: Copy Plugins
         run: |
-           cd Kuriimu2-1.2.1
+           cd Kuriimu2
            xcopy /I .\dist\final\plugins .\dist\final\Eto\Wpf\plugins
            xcopy /I .\dist\final\plugins .\dist\final\Eto\Gtk\plugins
            xcopy /I .\dist\final\plugins .\dist\final\Eto\Mac\plugins
@@ -94,9 +94,6 @@ jobs:
           files: ./Kuriimu2/dist/final/Eto/Gtk
           dest: ./Kuriimu2/update/Eto/Gtk/latest.zip
           
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
-
       - name: Install openSSL
         uses: crazy-max/ghaction-chocolatey@v1
         with:
