@@ -102,5 +102,5 @@ jobs:
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
-           name: Kuriimu2
+           name: Kuriimu2-GUI
            path: Kuriimu2/update/Eto/Gtk/latest.zip
