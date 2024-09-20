@@ -36,7 +36,7 @@ jobs:
            mkdir update/Eto/Gtk
            cp src/Kuriimu2.EtoForms/Kuriimu2.EtoForms/Resources/version.json update/Eto/Gtk/manifest.json
            dotnet publish ./src/Kuriimu2.EtoForms/Kuriimu2.EtoForms.Gtk/Kuriimu2.EtoForms.Gtk.csproj --output ./dist/final/Eto/Gtk --configuration Release --framework netcoreapp31 --runtime linux-arm64 /p:PublishSingleFile=true
-           mv ./dist/final/Eto/Gtk/Kuriimu2.Cmd ./dist/final/Eto/Gtk/Kuriimu2
+           mv ./dist/final/Eto/Gtk/Kuriimu2.EtoForms.Gtk ./dist/final/Eto/Gtk/Kuriimu2
            rm ./dist/final/Eto/Gtk/*.pdb
            dotnet build ./src/Kontract/Kontract.csproj --configuration Release
            dotnet build ./src/Komponent/Komponent.csproj --configuration Release
