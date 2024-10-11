@@ -29,11 +29,6 @@ jobs:
           echo "Free space:"
           df -h
 
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
-      with:
-          dotnet-version: 8.0.401
-
     - name: Setup tmate session
       uses: mxschmitt/action-tmate@v3
 
