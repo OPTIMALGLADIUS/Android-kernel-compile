@@ -32,6 +32,14 @@ jobs:
     - name: Setup tmate session
       uses: mxschmitt/action-tmate@v3
 
+    - name: Sync
+      run: |
+        cd make
+        repo sync -j4
+
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v3
+
     - uses: actions/upload-artifact@v4 
       with:
         name: MacOSX15.sdk.tar.xz
