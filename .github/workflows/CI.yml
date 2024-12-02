@@ -32,21 +32,7 @@ jobs:
     - name: Setup tmate session
       uses: mxschmitt/action-tmate@v3
 
-    - name: Sync
-      run: |
-        cd make
-        repo sync -j4
-
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
-
     - uses: actions/upload-artifact@v4 
       with:
         name: MacOSX15.sdk.tar.xz
-        path: /home/runner/work/Android-kernel-compile/Android-kernel-compile/osxcross/MacOSX15.sdk.tar.xz
-
-    - uses: actions/upload-artifact@v4
-      with:
-        name: MacOSX15.0.sdk.tar.xz
-        path: /home/runner/work/Android-kernel-compile/Android-kernel-compile/osxcross/MacOSX15.0.sdk.tar.xz
-
+        path: /home/runner/work/Android-kernel-compile/Android-kernel-compile/osxcross/vulkan.zip
