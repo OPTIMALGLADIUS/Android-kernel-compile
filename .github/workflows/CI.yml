@@ -10,7 +10,7 @@ on:
         
 jobs:
   build:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     steps:
     - name: Setup repository
       uses: actions/checkout@v3
@@ -21,8 +21,3 @@ jobs:
 
     - name: Setup tmate session
       uses: mxschmitt/action-tmate@v3
-
-    - uses: actions/upload-artifact@v4 
-      with:
-        name: Mali_Vulkan.zip
-        path: /home/runner/work/Android-kernel-compile/Android-kernel-compile/osxcross/vulkan.zip
