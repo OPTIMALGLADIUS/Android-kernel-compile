@@ -28,25 +28,7 @@ jobs:
       run: |
           echo "Free space:"
           df -h
-
-    - uses: uraimo/run-on-arch-action@v2
-      name: Architecture
-      id: runcmd
-      with:
-         arch: aarch64
-         distro: ubuntu22.04
-         
-         run: |
-            pip install gdown
-            git clone --depth 1 https://github.com/tpoechtrager/osxcross.git
-            cd osxcross
-            sudo apt install lzma-dev libxml2-dev -y
-            gdown https://drive.google.com/uc?id=1Xf1_oZ42ndV3r5YQhbL97MHuD1TOAwtw
-            gdown https://drive.google.com/uc?id=1XfzEnjJVCnDjSGt4XKUS4pV_DsOYMGK6
-            cp MacOSX15.sdk.tar.xz tarballs
-            cp MacOSX15.0.sdk.tar.xz tarballs
-            UNATTENDED=1 ./build.sh
-      
+          
     - name: Setup tmate session
       uses: mxschmitt/action-tmate@v3
 
