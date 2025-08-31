@@ -1,11 +1,5 @@
 #!/bin/bash
 
-#Initializing repo
-repo init --depth=1 -u https://android.googlesource.com/kernel/manifest -b common-android14-6.1-2024-06
-
-#Synchronizing repo
-repo --trace sync -c -j$(nproc --all) --no-tags --fail-fast
-
 #Getting the kernel source
 git clone --depth=1 https://github.com/OPTIMALGLADIUS/android_kernel_6.1_nothing_mt6878.git -b mt6878/Tetris/v cmf1
 
