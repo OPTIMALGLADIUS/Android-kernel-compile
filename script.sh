@@ -1,10 +1,16 @@
 #!/bin/bash
 
-#This is to add the additional architecture to get necessary packages
-sudo dpkg --add-architecture i386
+#Initializing repo
+repo init --depth=1 -u https://android.googlesource.com/kernel/manifest -b common-android14-6.1-2024-06
 
-#This is so that the packages are updated before moving ahead
-sudo apt update && sudo apt upgrade -y
+#Synchronizing repo
+repo --trace sync -c -j$(nproc --all) --no-tags --fail-fast
 
-#This is to install necessary packages
-sudo apt install git ccache automake flex lzop bison gperf build-essential zip curl zlib1g-dev zlib1g-dev:i386 g++-multilib python-networkx-doc libxml2-utils bzip2 libbz2-dev libbz2-1.0 libghc-bzlib-dev squashfs-tools pngcrush schedtool dpkg-dev liblz4-tool make optipng maven libssl-dev pwgen libswitch-perl policycoreutils minicom libxml-sax-base-perl libxml-simple-perl bc libc6-dev-i386 lib32ncurses5-dev x11proto-core-dev libx11-dev lib32z-dev libgl1-mesa-dev xsltproc unzip -y
+#Getting the kernel source
+git clone --depth=1 https://github.com/OPTIMALGLADIUS/android_kernel_6.1_nothing_mt6878.git -b mt6878/Tetris/v cmf1
+
+#Building kernel with full LTO
+tools/bazel build --config=fast --lto=full //cmf1:kernel_aarch64_dist
+
+#Packing the out directory
+zip -r kernel.zip /home/runner/work/Android-kernel-compile/Android-kernel-compile/build/out
