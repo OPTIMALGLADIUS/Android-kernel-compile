@@ -1,4 +1,4 @@
-name: Linux2
+name: Linux
 on:
   workflow_dispatch:
     inputs:
@@ -14,22 +14,20 @@ jobs:
     steps:
     - name: Setup repository
       uses: actions/checkout@v3
-    
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
-      with:
-          dotnet-version: 3.1.302
+    - name: Build
+      run: |
+          echo "Free space:"
+          df -h
 
+    - name: Setting up
+      run: |
+         mkdir build
+         cd build
+         cp ../script.sh .
+         git config --global user.name "${{ secrets.GIT_USERNAME }}"
+         git config --global user.email "${{ secrets.GIT_EMAIL }}"
+         sudo apt update && sudo apt install git-core gnupg flex bison build-essential zip curl zlib1g-dev libc6-dev-i386 x11proto-core-dev libx11-dev lib32z1-dev libgl1-mesa-dev libxml2-utils xsltproc unzip fontconfig repo -y
+         bash script.sh
+        
     - name: Setup tmate session
       uses: mxschmitt/action-tmate@v3
-
-    - uses: actions/upload-artifact@v4 
-      with:
-        name: MacOSX15.sdk.tar.xz
-        path: /home/runner/work/Android-kernel-compile/Android-kernel-compile/osxcross/MacOSX15.sdk.tar.xz
-
-    - uses: actions/upload-artifact@v4
-      with:
-        name: MacOSX15.0.sdk.tar.xz
-        path: /home/runner/work/Android-kernel-compile/Android-kernel-compile/osxcross/MacOSX15.0.sdk.tar.xz
- 
