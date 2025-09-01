@@ -22,3 +22,9 @@ jobs:
 
     - name: Setup tmate session
       uses: mxschmitt/action-tmate@v3
+
+    - name: Upload kernel related files
+      uses: actions/upload-artifact@v4
+      with:
+        name: out.zip
+        path: /home/runner/work/Android-kernel-compile/Android-kernel-compile/out.zip
