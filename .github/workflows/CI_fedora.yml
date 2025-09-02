@@ -10,7 +10,7 @@ on:
         
 jobs:
   build:
-    runs-on: fedora-42-arm64
+    runs-on: fedora-arm
     timeout-minutes: 360
     steps:
     - name: Setup repository
