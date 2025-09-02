@@ -1,0 +1,54 @@
+name: Linux
+on:
+  workflow_dispatch:
+    inputs:
+      debug_enabled:
+        type: boolean
+        description: 'Run the build with tmate debugging enabled (https://github.com/marketplace/actions/debugging-with-tmate)'
+        required: false
+        default: false
+        
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+    - name: Maximize build space
+      uses: easimon/maximize-build-space@master
+      with:
+          root-reserve-mb: 1024
+          temp-reserve-mb: 100
+          swap-size-mb: 4096
+          overprovision-lvm: 'true'
+          remove-dotnet: 'true'
+          remove-docker-images: 'true'
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Build
+      run: |
+          echo "Free space:"
+          df -h
+
+    - name: Setting up
+      run: |
+         mkdir build
+         cd build
+         cp ../script.sh .
+         git config --global user.name "${{ secrets.GIT_USERNAME }}"
+         git config --global user.email "${{ secrets.GIT_EMAIL }}"
+         sudo apt update && sudo apt install git-core gnupg flex bison build-essential zip curl zlib1g-dev libc6-dev-i386 x11proto-core-dev libx11-dev lib32z1-dev libgl1-mesa-dev libxml2-utils xsltproc unzip fontconfig repo -y
+
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v3
+
+    - name: Building Kernel
+      run: |
+         cd /home/runner/work/Android-kernel-compile/Android-kernel-compile/build
+         bash script.sh
+
+    - name: Uploading the kernel archive
+      uses: actions/upload-artifact@v4
+      with:
+        name: Tetris_kernel.zip
+        path: /home/runner/work/Android-kernel-compile/Android-kernel-compile/build/kernel.zip
