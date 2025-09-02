@@ -1,4 +1,4 @@
-name: Linux
+name: Linux_Namespace
 on:
   workflow_dispatch:
     inputs:
