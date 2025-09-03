@@ -1,4 +1,4 @@
-name: CI_fedora
+name: CI_arm64
 on:
   workflow_dispatch:
     inputs:
