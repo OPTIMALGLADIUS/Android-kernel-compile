@@ -1,0 +1,30 @@
+name: CI_fedora
+on:
+  workflow_dispatch:
+    inputs:
+      debug_enabled:
+        type: boolean
+        description: 'Run the build with tmate debugging enabled (https://github.com/marketplace/actions/debugging-with-tmate)'
+        required: false
+        default: false
+        
+jobs:
+  build:
+    runs-on: ubuntu-latest-arm64
+    timeout-minutes: 360
+    steps:
+    - name: Setup repository
+      uses: actions/checkout@v3
+    - name: Build
+      run: |
+          echo "Free space:"
+          df -h
+
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v3
+
+    - name: Upload kernel related files
+      uses: actions/upload-artifact@v4
+      with:
+        name: out.zip
+        path: /home/runner/work/Android-kernel-compile/Android-kernel-compile/out.zip
